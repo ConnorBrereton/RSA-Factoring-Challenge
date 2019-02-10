@@ -90,15 +90,16 @@ void _putint(long long unsigned int *dest, long long unsigned int n)
  */
 long long unsigned int compute(long long unsigned int *src, long long unsigned int n)
 {
-        int i, k = 0;
-	long long unsigned int result;
+        int i;
+	long long unsigned int result = 0;
 
         for (i = 0; i < n; i++)
 	{
-                result = 10 * k + src[i];
-		k++;
+                result *= 10;
+		result += src[i];
 	}
 
+	printf("result is: %llu\n", result);
 	return result;
 }
 
