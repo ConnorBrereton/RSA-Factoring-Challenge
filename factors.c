@@ -1,5 +1,5 @@
 #include "rsa.h"
-
+#include "pollard-rho.c"
 
 /**
  * init - Initializes the text buffer with null char
@@ -50,7 +50,7 @@ void file2buffer(char *filename, char *buffer)
  *
  * Return: Number of elements copied
  */
-int _atoi(char *src, int *dest)
+long long unsigned int _atoi(char *src, long long unsigned int *dest)
 {
 	int i = 0;
 
@@ -69,12 +69,37 @@ int _atoi(char *src, int *dest)
  *
  * Return: None (void function)
  */
-void _putint(int *dest, int n)
+void _putint(long long unsigned int *dest, long long unsigned int n)
 {
 	int i = 0;
 
 	for (i = 0; i < n; i++)
 		putchar(dest[i] + '0');
+}
+
+/**
+ * int_to_compute - Converts int array to int
+ *
+ * @src: Array of integers forming number
+ *
+ * @n: Number of digits in number
+ *
+ * @result: Final number to use in PollardRho
+ *
+ * Return: Integer repr. of array of ints
+ */
+long long unsigned int compute(long long unsigned int *src, long long unsigned int n)
+{
+        int i, k = 0;
+	long long unsigned int result;
+
+        for (i = 0; i < n; i++)
+	{
+                result = 10 * k + src[i];
+		k++;
+	}
+
+	return result;
 }
 
 /**
@@ -91,8 +116,11 @@ int main(int argc, char **argv)
 	char buffer[S_BUFFER]; /* original buffer */
 	char *token; /* tokenized buffer */
 
-	int number[VALUE];
-	int cv = 0;
+	long long unsigned int number[VALUE]; /* integer repr. of number */
+	long long unsigned int cv = 1;
+
+	long long unsigned int n; /* final value to compute */
+	long long unsigned int big = 1;
 
 	if (argc != 2)
 		return (EXIT_FAILURE);
@@ -104,10 +132,15 @@ int main(int argc, char **argv)
 	while (token != NULL)
 	{
 		cv = _atoi(token, number); /* converted values */
+
+		n = compute(number, cv);
+		big = n / PollardRho(n);
+		printf("%llu=%llu*%llu\n", n, big, PollardRho(n));
+
 		_putint(number, cv);
 		putchar('\n');
 		token = strtok(NULL, " \n"); /* breaks up each number */
 	}
+
 	return (EXIT_SUCCESS);
 }
-
