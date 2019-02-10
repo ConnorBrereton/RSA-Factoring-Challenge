@@ -78,13 +78,11 @@ void _putint(long long unsigned int *dest, long long unsigned int n)
 }
 
 /**
- * int_to_compute - Converts int array to int
+ * compute - Converts int array to int
  *
  * @src: Array of integers forming number
  *
  * @n: Number of digits in number
- *
- * @result: Final number to use in PollardRho
  *
  * Return: Integer repr. of array of ints
  */
