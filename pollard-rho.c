@@ -42,10 +42,12 @@ long long unsigned int PollardRho(long long unsigned int n)
 	srand (time(NULL)); 
 
 	/* no prime divisor for 1 */
-	if (n==1) return n; 
+	if (n==1)
+		return n; 
 
 	/* even number means one of the divisors is 2 */
-	if (n % 2 == 0) return 2; 
+	if (n % 2 == 0)
+		return 2; 
 
 	/* we will pick from the range [2, N) */
 	long long unsigned int x = (rand()%(n-2))+2; 
