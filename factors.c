@@ -97,7 +97,7 @@ long long unsigned int compute(long long unsigned int *src, long long unsigned i
 		result += src[i];
 	}
 
-	printf("result is: %llu\n", result);
+	//printf("result is: %llu\n", result);
 	return result;
 }
 
@@ -136,8 +136,8 @@ int main(int argc, char **argv)
 		big = n / PollardRho(n);
 		printf("%llu=%llu*%llu\n", n, big, PollardRho(n));
 
-		_putint(number, cv);
-		putchar('\n');
+		//_putint(number, cv);
+		//putchar('\n');
 		token = strtok(NULL, " \n"); /* breaks up each number */
 	}
 
